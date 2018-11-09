@@ -1,6 +1,8 @@
 package exceltest;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +29,9 @@ public class UtilExcel {
 	
 	private void open(){
 		try {
-			workbook = WorkbookFactory.create(new File(ruta));
+			FileInputStream inputStream = new FileInputStream(new File(ruta));
+            workbook = WorkbookFactory.create(inputStream);
+			//workbook = WorkbookFactory.create(new File(ruta));
 		} catch (EncryptedDocumentException e) {
 			JOptionPane.showMessageDialog(null, "Error en cargar el archivo, encriptado");
 			e.printStackTrace();
@@ -45,6 +49,31 @@ public class UtilExcel {
 			e.printStackTrace();
 		}
 		workbook = null;
+	}
+	
+	
+	public void setCell(String hoja, int fila, int columna, String dato){
+		open();
+		
+		Sheet sheet = workbook.getSheet(hoja);
+		Row row = sheet.createRow(fila);
+		Cell cell = row.createCell(columna);
+		cell.setCellValue(dato);
+		
+
+		
+        try {
+        	FileOutputStream outputStream = new FileOutputStream(ruta);
+			workbook.write(outputStream);
+			outputStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		
+		
+		close();
 	}
 	
 	public  HashMap<String, ArrayList<String>> getRows(String hoja){
