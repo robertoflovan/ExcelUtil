@@ -18,7 +18,7 @@ public class TestExcel {
 		//datos.size();
 		
 		
-		u.setCell("Hoja1", 1, 1, "texto");
+		u.setCell("Hoja1", 3, 1, "texto");
 		
 		
 		System.out.println("tst");

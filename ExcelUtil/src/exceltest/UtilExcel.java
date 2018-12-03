@@ -56,7 +56,7 @@ public class UtilExcel {
 		open();
 		
 		Sheet sheet = workbook.getSheet(hoja);
-		Row row = sheet.createRow(fila);
+		Row row = sheet.getRow(fila);
 		Cell cell = row.createCell(columna);
 		cell.setCellValue(dato);
 		
@@ -71,8 +71,6 @@ public class UtilExcel {
 			e.printStackTrace();
 		}
         
-		
-		
 		close();
 	}
 	
